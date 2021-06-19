@@ -1,81 +1,48 @@
 <%- include('bootheader') -%>
 <%- include('menubar') -%>
 <div class="jumbotron">
-    <h1>This is the Demo page</h1>
-    <p> This is a paragraph </p>
+    <h1>Brandeis Overflow Demo</h1>
 </div>
 
+<form method="post" action="/questiondemo" class="bg-secondary text-warning">
+  Enter your name/username:
+  <input type="text"
+         name="fullname"
+         placeholder="your full name/user name"><br>
+  Enter current date?
+  <input type="date"
+         name="currentDate"><br>
 
-<table class="table table-bordered table-striped">
-  <thead>
-    <tr>
-      <th>English</th> 
-      <th>Spanish</th> 
-      <th>Japanese</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>one</td>
-      <td>uno</td>
-      <td>ichi</td>
-    </tr>
-    <tr>
-      <td>two</td>
-      <td>dos</td>
-      <td>ni</td>
-    </tr>
-    <tr>
-      <td>three</td>
-      <td>tres</td>
-      <td>san</td>
-    </tr>   
-  </tbody> 
-</table>
-
-<hr>
-<h2>Follow the links!</h2>
-<ol>
-     <li><a href="images/dog.jpg">Dog</a></li>
-     <li><a href="images/cat.jpg">Cat</a></li>
-     <li><a href="http://www.brandeis.edu">Brandeis</a></li>
-</ol>
-<hr>
-
-<h1> Four Colors </h1>
-<ul>
-<li> red </li>
-<li> green </li>
-<li> blue </li>
-<li> black </li>
-</ul>
-
-  <img src="images/dog.jpg" width="200">
+  What is your current grade
+  <select name="grade">
+    <option>freshman</option>
+    <option>sophomore</option>
+    <option>junior</option>
+    <option>senior</option>
+  </select>
   <hr>
-  <a href="http://www.brandeis.edu">Brandeis</a>
 
-  <h6>Count to 3 in Spanish</h6>
-  <ol>
-    <li>uno</li>
-    <li>dos</li>
-    <li>tres</li>
-  </ol>
+ What category does this question fall into:<br>
+  Economics <input type="checkbox" name="catagory" value=" Economics"><br>
+  Computer Science  <input type="checkbox" name="catagory" value=" Computer Science"><br>
+  Math <input type="checkbox" name="catagory" value=" Math"><br>
+  Physics <input type="checkbox" name="catagory" value=" Physics"><br>
+  Chemistry <input type="checkbox" name="catagory" value=" Chemistry"><br>
+  Biology <input type="checkbox" name="catagory" value=" Biology"><br>
+  History <input type="checkbox" name="catagory" value=" History"><br>
+  English <input type="checkbox" name="catagory" value=" English"><br>
+  Language <input type="checkbox" name="catagory" value=" Language"><br>
+  Student Life <input type="checkbox" name="catagory" value=" Student Life"><br>
+  General <input type="checkbox" name="catagory" value=" General"><br>
+  <br>
+  Please write your question here:<br>
+  <textarea name="question" rows="10" cols="40"></textarea>
+  <br>
+  <hr>
 
-  <div>
-    This is a div element
-  </div>
+  <input type="submit" value="Submit Question Here">
+</form>
 
-  <div class="row">
-    <div class="col">
-      First Column
-      <img src="images/dog.jpg" 
-       width="200">
-    </div>
-    <div class="col">
-      Second Column
-      <img src="images/cat.jpg" 
-       width="200">
-    </div>
-  </div>
+<hr>
 
 <%- include('bootfooter') -%>

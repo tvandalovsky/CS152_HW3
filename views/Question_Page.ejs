@@ -1,0 +1,33 @@
+<%- include('bootheader') -%>
+<%- include('menubar') -%>
+
+<div class="jumbotron">
+  <h1>Question Page</h1>
+</div>
+
+<br>
+<h5>Here is a question by the <%= locals.name %>, who is currently a <%= locals.grade %> </h5>
+<h6> This questions was submitted on <%= locals.date %> under the catagories of: <%= locals.catagory %>.</h6>
+
+<!-- <%# var string = locals.catagory; %> -->
+<!-- <%# string.split(",").map((i) => { %> -->
+<!--  <li> <%#= i %>  </li> -->
+<!--    <%# })%> -->
+
+
+<hr>
+<h6>
+<%= locals.question %>
+</h6>
+<hr>
+<br>
+
+<form method="post" action="/answerdemo" class="bg-secondary text-warning">
+  If you wish to answer this question <br>
+  <textarea name="answer" rows="20" cols="80" class = "bg-primary text-white"> </textarea> <br>
+  <input type="submit" value="Submit Answer Here">
+</form>
+
+
+
+<%- include('bootfooter') -%>

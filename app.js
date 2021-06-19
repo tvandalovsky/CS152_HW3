@@ -52,20 +52,66 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/demo", 
-        function (req, res){res.render("demo");});
+app.get("/demo", (req, res) => {
+  res.render("demo");
+});
+
+app.post("/questiondemo",(request,response) => {
+  response.locals.name = request.body.fullname
+  response.locals.date = request.body.date
+  response.locals.grade = request.body.grade
+  response.locals.question = request.body.question
+  response.locals.catagory = request.body.catagory
+  response.render("Question_Page")
+})
+
+app.post("/answerdemo",(request,response) => {
+  response.locals.answer = request.body.answer
+  response.render("Answer_Page")
+})
+
 
 app.get("/about", (request, response) => {
   response.render("about");
 });
 
+//app.get("/dogAPI", (request,response) => {
+  //response.render("dogAPI")
+//})
+
+app.get("/dogAPI",
+  async (req,res,next) => {
+    try {
+      const url = "https://dog.ceo/api/breeds/image/random"
+      const result = await axios.get(url)
+      console.dir(result)
+      const dogimage = result.data.message
+      console.log(dogimage)
+      res.locals.dogimage = dogimage
+      res.render('dogAPI')
+    } catch(error){
+      next(error)
+    }
+})
+
+
 app.get("/form", (request,response) => {
   response.render("form")
 })
 
-app.post("/showformdata", (request,response) => {
-  response.json(request.body)
+app.get("/dataDemo", (request,response) => {
+  response.locals.name="Tim Hickey"
+  response.locals.vals =[1,2,3,4,5]
+  response.locals.people =[
+    {'name':'Tim','age':65},
+    {'name':'Yas','age':29}]
+  response.render("dataDemo")
 })
+
+
+//app.post("/showformdata", (request,response) => {
+//  response.json(request.body)
+//})
 
 // Here is where we will explore using forms!
 
@@ -75,30 +121,30 @@ app.post("/showformdata", (request,response) => {
 // and send it back to the browser in raw JSON form, see
 // https://covidtracking.com/data/api
 // for all of the kinds of data you can get
-app.get("/c19", 
-  async (req,res,next) => {
-    try {
-      const url = "https://covidtracking.com/api/v1/us/current.json"
-      const result = await axios.get(url)
-      res.json(result.data)
-    } catch(error){
-      next(error)
-    }
-})
+//app.get("/c19",
+//  async (req,res,next) => {
+//    try {
+//      const url = "https://covidtracking.com/api/v1/us/current.json"
+//      const result = await axios.get(url)
+//      res.json(result.data)
+//    } catch(error){
+//      next(error)
+//    }
+//})
 
 // this shows how to use an API to get recipes
 // http://www.recipepuppy.com/about/api/
 // the example here finds omelet recipes with onions and garlic
-app.get("/omelet",
-  async (req,res,next) => {
-    try {
-      const url = "http://www.recipepuppy.com/api/?i=onions,garlic&q=omelet&p=3"
-      const result = await axios.get(url)
-      res.json(result.data)
-    } catch(error){
-      next(error)
-    }
-})
+//app.get("/omelet",
+//  async (req,res,next) => {
+//    try {
+//      const url = "http://www.recipepuppy.com/api/?i=onions,garlic&q=omelet&p=3"
+//      const result = await axios.get(url)
+//      res.json(result.data)
+//    } catch(error){
+//      next(error)
+//    }
+//})
 
 // Don't change anything below here ...
 
@@ -118,7 +164,7 @@ app.use(function(err, req, res, next) {
 });
 
 //Here we set the port to use
-const port = "5000";
+const port = "4545";
 app.set("port", port);
 
 // and now we startup the server listening on that port
