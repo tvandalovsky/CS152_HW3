@@ -8,9 +8,23 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
+const cors = require('cors');
+const layouts = require("express-ejs-layouts");
 //const bodyParser = require("body-parser");
 const axios = require("axios");
 var debug = require("debug")("personalapp:server");
+
+const mongoose = require( 'mongoose' );
+//mongoose.connect( `mongodb+srv://${auth.atlasAuth.username}:${auth.atlasAuth.password}@cluster0-yjamu.mongodb.net/authdemo?retryWrites=true&w=majority`);
+mongoose.connect( 'mongodb://localhost/authDemo');
+//const mongoDB_URI = process.env.MONGODB_URI
+//mongoose.connect(mongoDB_URI)
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log("we are connected!!!")
+});
 
 // Now we create the server
 const app = express();
@@ -23,9 +37,22 @@ app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-
+app.use(cors());
+app.use(layouts);
 // Here we specify that static files will be in the public folder
 app.use(express.static(path.join(__dirname, "public")));
+
+
+
+
+const questionRouter = require('./routes/questionRoute');
+app.use('/q',questionRouter);
+
+const myLogger = (req,res,next) => {
+  console.log('inside a route!')
+  next()
+}
+
 
 // Here we enable session handling ..
 app.use(
@@ -95,18 +122,18 @@ app.get("/dogAPI",
 })
 
 
-app.get("/form", (request,response) => {
-  response.render("form")
-})
+//app.get("/form", (request,response) => {
+//  response.render("form")
+//})
 
-app.get("/dataDemo", (request,response) => {
-  response.locals.name="Tim Hickey"
-  response.locals.vals =[1,2,3,4,5]
-  response.locals.people =[
-    {'name':'Tim','age':65},
-    {'name':'Yas','age':29}]
-  response.render("dataDemo")
-})
+//app.get("/dataDemo", (request,response) => {
+//  response.locals.name="Tim Hickey"
+//  response.locals.vals =[1,2,3,4,5]
+//  response.locals.people =[
+//    {'name':'Tim','age':65},
+//    {'name':'Yas','age':29}]
+//  response.render("dataDemo")
+//})
 
 
 //app.post("/showformdata", (request,response) => {

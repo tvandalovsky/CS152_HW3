@@ -1,0 +1,21 @@
+<%- include('bootheader') -%>
+<%- include('menubar') -%>
+
+  <div class="jumbotron">
+    <h1> Test test ToDo List for Tester </h1>
+    <p> Here is your list of things to do! </p
+
+      <% questions.forEach(questionPosted => { %>
+      <li>  <a href="/q/remove/<%=questionPosted._id %>"> X</a>
+           :: <%= questionPosted.questionString %> </li>
+    <% }) %>
+
+    <form method="post" action="/q">
+        new question: <input type="text" name="questionPosted"><br>
+        <input type="submit" value="store">
+    </form>
+
+
+  </div>
+
+  <%- include('bootfooter') -%>
